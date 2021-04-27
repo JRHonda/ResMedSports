@@ -23,11 +23,11 @@ extension UIWindow {
                 return indicator
             } else {
                 let indicatorView = UIActivityIndicatorView(style: .large)
-                indicatorView.color = .black
+                indicatorView.color = UIColor.screenOverlayColor.complimentary()
                 indicatorView.center = self.center
                 indicatorView.startAnimating()
                 let overlay = UIView(frame: self.frame)
-                overlay.backgroundColor = UIColor.gray
+                overlay.backgroundColor = UIColor.screenOverlayColor
                 overlay.alpha = 0.8
                 overlay.addSubview(indicatorView)
                 UIWindow.association[self] = overlay

@@ -16,10 +16,27 @@ class SportResultsTableViewController: UITableViewController {
     let sportCellNib = UINib(nibName: "SportResultCell", bundle: nil)
     let viewModel = SportResultsVM()
     
-    let alertController: (String) -> UIAlertController = {
+    lazy var alertController: (String, [UIAlertAction]) -> UIAlertController = {
         let alert = UIAlertController(title: "Sport News", message: $0, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        if $1.isEmpty {
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        } else {
+            for action in $1 {
+                alert.addAction(action)
+            }
+        }
+        
         return alert
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if UIApplication.isDeviceJailBrokenCanOpenUrl() {
+            let action = UIAlertAction(title: "OK", style: .default) { (action) in
+                fatalError()
+            }
+            present(alertController("It appears that your device is jailbroken, you may not use this app on a jailbroken device.", [action]), animated: true, completion: nil)
+        }
     }
     
     // MARK: - Intializers
@@ -44,7 +61,7 @@ class SportResultsTableViewController: UITableViewController {
         viewModel.apiErrorOccured
             .receive(on: DispatchQueue.main)
             .sink { (error) in
-                self.present(self.alertController(error.localizedDescription), animated: true)
+                self.present(self.alertController(error.localizedDescription, []), animated: true)
                 UIApplication.shared.keyWindow?.stopIndicatingActivity()
                 self.getResultsBtn.isEnabled = true
             }

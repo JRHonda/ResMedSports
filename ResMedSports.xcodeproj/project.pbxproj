@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0CAD9A263870E800FF3C11 /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CAD99263870E800FF3C11 /* UIColor+extensions.swift */; };
 		0C1339A8263610ED00FB8F88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1339A7263610ED00FB8F88 /* AppDelegate.swift */; };
 		0C1339AA263610ED00FB8F88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1339A9263610ED00FB8F88 /* SceneDelegate.swift */; };
 		0C1339AF263610ED00FB8F88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C1339AD263610ED00FB8F88 /* Main.storyboard */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		08E074273991B2714E1E0AF7 /* Pods-ResMedSports-ResMedSportsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ResMedSports-ResMedSportsUITests.release.xcconfig"; path = "Target Support Files/Pods-ResMedSports-ResMedSportsUITests/Pods-ResMedSports-ResMedSportsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		0C0CAD99263870E800FF3C11 /* UIColor+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
 		0C1339A4263610ED00FB8F88 /* ResMedSports.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResMedSports.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C1339A7263610ED00FB8F88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C1339A9263610ED00FB8F88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				0C133A6D26363C0600FB8F88 /* Date+extensions.swift */,
 				0C2413AF26375A97004D205F /* UIWindow+extensions.swift */,
 				0C2413B426375D61004D205F /* UIApplication+extensions.swift */,
+				0C0CAD99263870E800FF3C11 /* UIColor+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				0C133A072636147E00FB8F88 /* SportResultsTableViewController.swift in Sources */,
 				0C133A6126363BDE00FB8F88 /* String+extensions.swift in Sources */,
 				0C133AB12636435F00FB8F88 /* SportResultsVM.swift in Sources */,
+				0C0CAD9A263870E800FF3C11 /* UIColor+extensions.swift in Sources */,
 				0C2413CA26379461004D205F /* Baseball.swift in Sources */,
 				0C133AA226363FA300FB8F88 /* Tennis.swift in Sources */,
 				0C133A5C26363BC200FB8F88 /* DateFormatter+extensions.swift in Sources */,
