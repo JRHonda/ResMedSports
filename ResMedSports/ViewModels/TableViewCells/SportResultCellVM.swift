@@ -8,9 +8,9 @@
 import UIKit
 
 class SportResultCellVM: UITableViewCell {
+    // MARK: - Properties
     @IBOutlet weak var summary: UILabel!
     @IBOutlet weak var time: UILabel!
-    
     public var height: CGFloat {
         return super.frame.size.height
     }

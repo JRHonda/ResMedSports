@@ -10,69 +10,80 @@ import Combine
 
 class SportResultsVM {
     
+    // MARK: - Properties
     let sportResultService: SportResultsService
+    var orderedSportResultsDictWithDateKeys = CurrentValueSubject<([String: [CommonSport]]?, [String]?), Never>((nil, nil))
+    var apiErrorOccured = PassthroughSubject<AWAPIError, Never>()
     
-    @Published var orderedSportResultsDictWithDateKeys: ([String: [CommonSport]]?, [String]?)
-    
+    // MARK: - Initializers
     init(sportResultService: SportResultsService = .init(client: AncientWoodAPI())) {
         self.sportResultService = sportResultService
     }
-   
+    
+    // MARK: - Internal
+    
+    /// Kicks off an HTTP request to retrieve sport results from the '/results' endpoint
     func getGroupedAndOrderedSportResults() {
-        
-        sportResultService.getResults { (result) in
+        return sportResultService.getResults { (result) in
             switch result {
             case .success(let structure):
-                self.orderedSportResultsDictWithDateKeys = self.buildOrderedResults(sportResults: structure)
-            case .failure(_):
-                self.orderedSportResultsDictWithDateKeys = (nil, nil)
+                self.orderedSportResultsDictWithDateKeys.send(self.buildOrderedResults(sportResults: structure))
+            case .failure(let error):
+                self.apiErrorOccured.send(error)
             }
         }
     }
     
-    private func buildOrderedResults(sportResults: SportResultStructure) -> ([String: [CommonSport]]?, [String]?) {
+    /// Takes sports results with date information and performs any combination of descending or ascending order for group
+    /// date of sport results and the group of sport results themselves.
+    /// - Parameter sportResults: Fully decoded sport results
+    /// - Returns: An ordered-by-date dictionary with date-ordered sport results, and an associated array of date keys - ordered as well.
+    private func buildOrderedResults(sportResults: SportResultStructure, sportsDescending: Bool = true) -> ([String: [CommonSport]]?, [String]?) {
         
-        var orderedDict = [String: [CommonSport]]()
+        let allSportResults: [CommonSport] = sportResults.getAllSportResultsFlattened()
         
-        let commonSports = [sportResults.f1Results, sportResults.nbaResults, sportResults.tennisResults]
-        
-        let flattenedSports = commonSports.flatMap { (sports) -> [CommonSport] in
-            return sports ?? []
-        }
-        
-        if flattenedSports.isEmpty {
-            print("Flatten operation did not work")
+        if allSportResults.isEmpty {
+            print("No sport results to display")
             return (nil, nil)
         }
         
         var shortenedDateSet = Set<String>()
         
-        flattenedSports.forEach { (sport) in
+        allSportResults.forEach { (sport) in
             if let shortenedDateStr = sport.publicationDate?.convertPublicationDateToShortDateString() {
                 shortenedDateSet.insert(shortenedDateStr)
             }
         }
         
-        if let sortedKeyDates = sortKeyDates(dateSet: shortenedDateSet) {
-            shortenedDateSet.forEach { (shortDate) in
-                orderedDict[shortDate] = flattenedSports
-                    .filter({ $0.publicationDate?.convertPublicationDateToShortDateString() == shortDate})
-                    .sorted(by: { (sport1, sport2) -> Bool in
-                        if let pubDateStr1 = sport1.publicationDate,
-                           let pubDateStr2 = sport2.publicationDate,
-                           let pubDate1 = pubDateStr1.toDate(),
-                           let pubDate2 = pubDateStr2.toDate() {
+        let sortedKeyDates = sortKeyDates(dateSet: shortenedDateSet)
+        
+        var orderedDict = [String: [CommonSport]]()
+        shortenedDateSet.forEach { (shortDate) in
+            // for each date key, sort the sport results
+            orderedDict[shortDate] = allSportResults
+                .filter({ $0.publicationDate?.convertPublicationDateToShortDateString() == shortDate})
+                .sorted(by: { (sport1, sport2) -> Bool in
+                    if let pubDateStr1 = sport1.publicationDate,
+                       let pubDateStr2 = sport2.publicationDate,
+                       let pubDate1 = pubDateStr1.toDate(),
+                       let pubDate2 = pubDateStr2.toDate() {
+                        if sportsDescending {
                             return pubDate1 > pubDate2
                         }
-                        return false
-                    })
-            }
-            return (orderedDict, sortedKeyDates)
+                        return pubDate1 < pubDate2
+                    }
+                    return false
+                })
         }
-        return (nil, nil)
+        return (orderedDict, sortedKeyDates)
     }
     
-    private func sortKeyDates(dateSet: Set<String>, descending: Bool = true) -> [String]? {
+    /// Takes date strings, transforms them to Date, and orders dates by ascending or descending order.
+    /// - Parameters:
+    ///   - dateSet: A Set of type string to order
+    ///   - descending: Boolean to set order to descending or ascending. Default == true
+    /// - Returns: An ordered Array of type String, or nil
+    private func sortKeyDates(dateSet: Set<String>, descending: Bool = true) -> [String] {
         return dateSet.sorted { (str1, str2) -> Bool in
             
             if let date1 = DateFormatter.monthDayYearFormatter.date(from: str1),

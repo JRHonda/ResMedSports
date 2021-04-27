@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Nba: CommonSport {
-    
+
     public let publicationDate: String?
     public let gameNumber: Int?
     public let loser: String?
@@ -16,7 +16,7 @@ public struct Nba: CommonSport {
     public let tournament: String?
     public let winner: String?
     
-    var summary: String {
+    public var summary: String {
         get {
             if let gameNumber = gameNumber,
                let mvp = mvp,

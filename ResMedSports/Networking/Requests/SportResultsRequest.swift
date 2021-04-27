@@ -19,8 +19,12 @@ struct MakeSportResultsRequest: Request {
     var body: Data? { nil }
     
     // MARK: - Internal
+    
+    /// Decodes response into external representation
+    /// - Parameter response: response from endpoint /results
+    /// - Throws: AWAPIError
+    /// - Returns: SportResultStructure
     func handle(response: Data) throws -> SportResultStructure {
-        //let json = String(bytes: response, encoding: .utf8)
         
         let decoder = JSONDecoder()
     

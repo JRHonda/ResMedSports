@@ -15,13 +15,13 @@ public struct Tennis: CommonSport {
     public let tournament: String?
     public let winner: String?
     
-    var summary: String {
+    public var summary: String {
         get {
             if let loser = loser,
                let numberOfSets = numberOfSets,
                let tournament = tournament,
                let winner = winner {
-                return "\(tournament.trim()): \(winner.trim()) wins against \(loser.trim()) in \(numberOfSets)"
+                return "\(tournament.trim()): \(winner.trim()) wins against \(loser.trim()) in \(numberOfSets) sets"
             }
             return "Tennis Result"
         }

@@ -8,13 +8,13 @@
 import Foundation
 
 public struct F1: CommonSport {
-    
+
     public let publicationDate: String?
     public let seconds: Double?
     public let tournament: String?
     public let winner: String?
     
-    var summary: String {
+    public var summary: String {
         get {
             if let winner = winner, let tournament = tournament, let seconds = seconds {
                 return "\(winner.trim()) wins \(tournament.trim()) by \(seconds) seconds"
@@ -22,4 +22,5 @@ public struct F1: CommonSport {
             return "F1 Result"
         }
     }
+    
 }
