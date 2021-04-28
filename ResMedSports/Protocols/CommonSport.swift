@@ -13,6 +13,7 @@ public protocol CommonSport: Codable {
 }
 
 extension CommonSport {
+    
     /// The time component of the publication date
     var time: String {
         get {
@@ -26,3 +27,4 @@ extension CommonSport {
     }
 
 }
+

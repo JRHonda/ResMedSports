@@ -67,28 +67,26 @@ class ResMedSportsTests: XCTestCase {
     func testBuildArrayOfCommonSportResultsToConcreteVersions() throws {
        
         let flattenedSportResults = sportResultStructure.getAllSportResultsFlattened()
-        print(flattenedSportResults)
         
-        print("\n\n")
+        var nbaResults = [Nba]()
+        var f1Results = [F1]()
+        var tennisResults = [Tennis]()
         
-        let concreteSportResults = flattenedSportResults.map { (commonSport) -> CommonSport in
-            if commonSport is F1 {
-                return commonSport
+        flattenedSportResults.forEach {
+            if $0 is F1 {
+                f1Results.append($0 as! F1)
             }
-            if commonSport is Nba {
-                return commonSport
+            if $0 is Nba {
+                nbaResults.append($0 as! Nba)
             }
-            if commonSport is Tennis {
-                return commonSport
+            if $0 is Tennis {
+                tennisResults.append($0 as! Tennis)
             }
-            return commonSport
         }
         
-        print(concreteSportResults)
-       
-//        let concreteSportResults = sportResultStructure.f1Results.map { (cSport) -> F1 in
-//
-//        }
+        XCTAssertEqual(nbaResults.count, 5)
+        XCTAssertEqual(f1Results.count, 3)
+        XCTAssertEqual(tennisResults.count, 3)
     }
     
     func testPerformanceExample() throws {

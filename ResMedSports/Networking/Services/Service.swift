@@ -65,7 +65,6 @@ class Service {
         task.resume()
     }
     
-    
     /// Prepares a request to make a HTTP call
     /// - Parameter request: Supports any type of request
     /// - Returns: A URLRequest to provide to an HTTP task

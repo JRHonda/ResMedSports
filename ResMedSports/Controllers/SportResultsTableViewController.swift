@@ -17,7 +17,22 @@ class SportResultsTableViewController: UITableViewController {
     let viewModel = SportResultsVM()
     
     lazy var alertController: (String, [UIAlertAction]) -> UIAlertController = {
-        let alert = UIAlertController(title: "Sport News", message: $0, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Sport News", message: "", preferredStyle: .alert)
+        let paragraphStyle = NSMutableParagraphStyle()
+        
+        paragraphStyle.alignment = .left
+        
+        let messageText = NSMutableAttributedString(
+            string: $0,
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: .body),
+                NSAttributedString.Key.foregroundColor : UIColor.systemGreen
+            ]
+        )
+        
+        alert.setValue(messageText, forKey: "attributedMessage")
+        
         if $1.isEmpty {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         } else {
@@ -25,9 +40,10 @@ class SportResultsTableViewController: UITableViewController {
                 alert.addAction(action)
             }
         }
-        
         return alert
     }
+    
+    // MARK: - Controller Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -39,7 +55,6 @@ class SportResultsTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Intializers
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,40 +124,7 @@ extension SportResultsTableViewController {
         } else {
             cell.summary.text = "IndexPath Row: \(indexPath.row)"
         }
-        
-        // Move and fade animation
-        return { (cell: SportResultCellVM, indexPath: IndexPath) -> (SportResultCellVM) in
-            cell.transform = CGAffineTransform(translationX: 0, y: cell.height / 2)
-                cell.alpha = 0
-
-                UIView.animate(
-                    withDuration: 0.5,
-                    delay: 0.05 * Double(indexPath.row),
-                    options: [.curveEaseInOut],
-                    animations: {
-                        cell.transform = CGAffineTransform(translationX: 0, y: 0)
-                        cell.alpha = 1
-                })
-            return cell
-            }(cell, indexPath)
-        
-        /* // Bounce animation
-        return { (cell: SportResultCellVM, indexPath: IndexPath, tableView: UITableView) -> (SportResultCellVM) in
-            cell.transform = CGAffineTransform(translationX: 0, y: cell.height / 4)
-
-                UIView.animate(
-                    withDuration: 1.0,
-                    delay: 0.05 * Double(indexPath.row),
-                    usingSpringWithDamping: 0.4,
-                    initialSpringVelocity: 0.1,
-                    options: [.curveEaseInOut],
-                    animations: {
-                        cell.transform = CGAffineTransform(translationX: 0, y: 0)
-                })
-            
-            return cell
-            }(cell, indexPath, tableView)
- */
+        return UIView.animateCellWithMoveAndFade(cell: cell, tableView: tableView, indexPath: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -158,9 +140,22 @@ extension SportResultsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        // TODO: - Implement showing JSON for particular row
-        print("Accessory tapped for section: \(indexPath.section) row: \(indexPath.row)")
+        if let dateKey = viewModel.orderedSportResultsDictWithDateKeys.value.1?[indexPath.section],
+           let sportsToDisplay = viewModel.orderedSportResultsDictWithDateKeys.value.0?[dateKey] {
+            
+            let sportResult = sportsToDisplay[indexPath.row]
+            var json = ""
+            
+            do {
+                json = try JsonEncoderFactory.getJsonForCommonSport(commonSport: sportResult)
+            } catch {
+                json = error.localizedDescription
+            }
+            
+            present(alertController(json, []), animated: true)
+        }
     }
+    
     /*
      // MARK: - Navigation
      
@@ -170,11 +165,34 @@ extension SportResultsTableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
 }
 
-
-
-
+struct JsonEncoderFactory {
+    
+    /// Takes a common sport result and converts it to its concrete implementation
+    /// - Parameter commonSport: general sport result
+    /// - Throws: EncodingError
+    /// - Returns: The JSON representation of the sport result
+    static func getJsonForCommonSport(commonSport: CommonSport) throws -> String {
+        let sportType = type(of: commonSport)
+        let encoder = JSONEncoder()
+        var data = Data()
+        switch sportType {
+        case is F1.Type:
+            data = try encoder.encode(sport: commonSport as! F1)
+        case is Nba.Type:
+            data = try encoder.encode(sport: commonSport as! Nba)
+        case is Tennis.Type:
+            data = try encoder.encode(sport: commonSport as! Tennis)
+        case is Baseball.Type:
+            data = try encoder.encode(sport: commonSport as! Baseball)
+        default:
+            throw EncodingError.invalidValue("Error encoding \(sportType)", .init(codingPath: [], debugDescription: "Encoding error for type \(sportType)"))
+        }
+        return String(bytes: data, encoding: .utf8) ?? "Invalid sport \(sportType) - no JSON to encode"
+    }
+}
 
 
 

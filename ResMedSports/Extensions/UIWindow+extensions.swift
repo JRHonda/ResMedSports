@@ -12,10 +12,9 @@ import class UIKit.UIColor
 import class Foundation.DispatchQueue
 
 extension UIWindow {
-    //private static let association = ObjectAssociation<UIActivityIndicatorView>()
+
     private static let association = ObjectAssociation<UIView>()
     
-    //var activityIndicator: UIActivityIndicatorView {
     var activityIndicator: UIView {
         set { UIWindow.association[self] = newValue }
         get {
@@ -37,6 +36,7 @@ extension UIWindow {
     }
     
     // MARK: - Activity Indicator
+    
     public func startIndicatingActivity(_ ignoringEvents: Bool? = true) {
         DispatchQueue.main.async {
             self.addSubview(self.activityIndicator)

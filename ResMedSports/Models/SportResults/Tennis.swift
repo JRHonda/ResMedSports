@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct Tennis: CommonSport {
-    
+struct Tennis: CommonSport {
+
     public let publicationDate: String?
     public let loser: String?
     public let numberOfSets: Int?

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Nba: CommonSport {
+struct Nba: CommonSport {
 
     public let publicationDate: String?
     public let gameNumber: Int?

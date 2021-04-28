@@ -24,6 +24,5 @@ struct Baseball: CommonSport {
             return "Baseball Result"
         }
     }
-    
-    
+
 }

@@ -32,9 +32,7 @@ public struct SportResultStructure: Decodable {
         
         let commonSports = [f1Results, nbaResults, tennisResults, baseballResults]
         
-        return commonSports.flatMap { (sports) -> [CommonSport] in
-            return sports
-        }
+        return commonSports.flatMap { return $0 }
     }
     
     enum CodingKeys: String, CodingKey {
@@ -43,4 +41,5 @@ public struct SportResultStructure: Decodable {
         case tennis = "Tennis"
         case baseball
     }
+    
 }

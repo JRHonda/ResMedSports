@@ -4,10 +4,33 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ResMedSports-xcui.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>ResMedSports.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0C1339A3263610ED00FB8F88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0C1339BC263610EF00FB8F88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0C1339C7263610EF00FB8F88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

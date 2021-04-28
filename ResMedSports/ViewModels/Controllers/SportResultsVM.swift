@@ -40,7 +40,7 @@ class SportResultsVM {
     /// - Returns: An ordered-by-date dictionary with date-ordered sport results, and an associated array of date keys - ordered as well.
     private func buildOrderedResults(sportResults: SportResultStructure, sportsDescending: Bool = true) -> ([String: [CommonSport]]?, [String]?) {
         
-        let allSportResults: [CommonSport] = sportResults.getAllSportResultsFlattened()
+        let allSportResults = sportResults.getAllSportResultsFlattened()
         
         if allSportResults.isEmpty {
             print("No sport results to display")

@@ -8,6 +8,7 @@
 import UIKit.UIApplication
 
 extension UIApplication {
+    
     // MARK: - Key Window
     var keyWindow: UIWindow? {
         get {
