@@ -36,10 +36,6 @@ class ResMedSportsTests: XCTestCase {
         XCTAssertEqual(sportResultStructure.getAllSportResultsFlattened().count, 11)
     }
     
-    func returnSport<T: CommonSport>(sport: T) -> some CommonSport {
-        return sport
-    }
-    
     func testConvertCommonSportToSomeSport() throws {
         let f1Results = sportResultStructure.f1Results
         var isTestSuccessful = false
@@ -93,6 +89,12 @@ class ResMedSportsTests: XCTestCase {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
+            do {
+                //try testConvertCommonSportToSomeSport()
+                try testBuildArrayOfCommonSportResultsToConcreteVersions()
+            } catch {
+                
+            }
         }
     }
     

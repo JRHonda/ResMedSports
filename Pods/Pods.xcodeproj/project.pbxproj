@@ -54,7 +54,7 @@
 		3E22D306664D52E6AA18167028E0C258 /* Pods-ResMedSports-ResMedSportsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ResMedSports-ResMedSportsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		42DF5404A111179615D769438D306CFA /* Pods-ResMedSportsTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ResMedSportsTests-dummy.m"; sourceTree = "<group>"; };
 		53C1A7E15161AE3A0E3A5090E19F84AE /* SwiftyJSON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.release.xcconfig; sourceTree = "<group>"; };
-		5600DD255A73F3C1A1A077CB4EAEC4B1 /* Pods_ResMedSportsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ResMedSportsTests.framework; path = "Pods-ResMedSportsTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5600DD255A73F3C1A1A077CB4EAEC4B1 /* Pods_ResMedSportsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResMedSportsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58AFB1206DA58D08428239D738FEA071 /* Pods-ResMedSports-ResMedSportsUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ResMedSports-ResMedSportsUITests.modulemap"; sourceTree = "<group>"; };
 		593C23BE6F81900B7E5D14655827CBEC /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
 		5FA3EAE78D7FE692D2392511C3B9EAE7 /* Pods-ResMedSports-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ResMedSports-Info.plist"; sourceTree = "<group>"; };
@@ -65,21 +65,21 @@
 		7DFCDDD21AC50F06E611D4253CC1EA66 /* Pods-ResMedSports-ResMedSportsUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ResMedSports-ResMedSportsUITests-Info.plist"; sourceTree = "<group>"; };
 		80D107F8974582FD429482271D48D575 /* Pods-ResMedSportsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ResMedSportsTests.release.xcconfig"; sourceTree = "<group>"; };
 		8136D40A8EBFCEC6BEB0D3BA37232BE2 /* Pods-ResMedSportsTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ResMedSportsTests-umbrella.h"; sourceTree = "<group>"; };
-		82B2914269277FD2B63B780CC4242AA5 /* Pods_ResMedSports.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ResMedSports.framework; path = "Pods-ResMedSports.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82B2914269277FD2B63B780CC4242AA5 /* Pods_ResMedSports.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResMedSports.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8402B1F48953105BA4D4269213D66B9B /* Pods-ResMedSportsTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ResMedSportsTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		874D7ABD2F10BB23F044CCCAEFA96E16 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
 		8ADBD3C743F87480B5539881AF48AB32 /* Pods-ResMedSportsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ResMedSportsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		993B9768990095DB89A3770C9C9C931A /* Pods-ResMedSports.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ResMedSports.debug.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A02287654566C4E833D550868E61137D /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
-		A212BF4DBB2EFE874C74C29254AA11D6 /* Pods_ResMedSports_ResMedSportsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ResMedSports_ResMedSportsUITests.framework; path = "Pods-ResMedSports-ResMedSportsUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A212BF4DBB2EFE874C74C29254AA11D6 /* Pods_ResMedSports_ResMedSportsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ResMedSports_ResMedSportsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D387028306FFBDB26895B80382328A /* Pods-ResMedSports-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ResMedSports-frameworks.sh"; sourceTree = "<group>"; };
 		BD33344B404AF48602430AEAE909CA61 /* Pods-ResMedSports.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ResMedSports.modulemap"; sourceTree = "<group>"; };
 		CA97F4CC36B0572C28FA8BB4137F73F9 /* Pods-ResMedSports-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ResMedSports-acknowledgements.plist"; sourceTree = "<group>"; };
 		CF26FEAD02179A0B181FCDA126E5EDA1 /* Pods-ResMedSportsTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ResMedSportsTests.modulemap"; sourceTree = "<group>"; };
 		D05B2E77E3A0939DE2989C4CA4930B16 /* Pods-ResMedSports-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ResMedSports-umbrella.h"; sourceTree = "<group>"; };
 		D7122450DC0EE4F8B63C9C2E1438497D /* Pods-ResMedSports-ResMedSportsUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ResMedSports-ResMedSportsUITests-dummy.m"; sourceTree = "<group>"; };
-		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E258E75932FEAB36BDA1E2046ADA5730 /* Pods-ResMedSports-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ResMedSports-dummy.m"; sourceTree = "<group>"; };
 		E3B26671D46BEB153A6F0B6D78B4BBC4 /* Pods-ResMedSports-ResMedSportsUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ResMedSports-ResMedSportsUITests-umbrella.h"; sourceTree = "<group>"; };
 		E4A0FD389D173F56FBDB8A357093095A /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
@@ -167,7 +167,6 @@
 				874D7ABD2F10BB23F044CCCAEFA96E16 /* SwiftyJSON.swift */,
 				E7117206C2C7669CF7C06E59DE55529D /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -376,7 +375,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1250;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -503,7 +502,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -612,7 +611,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -682,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -784,7 +783,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
