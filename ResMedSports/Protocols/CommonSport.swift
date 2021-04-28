@@ -17,12 +17,14 @@ extension CommonSport {
     /// The time component of the publication date
     var time: String {
         get {
-            if let publicationDate = publicationDate,
-               let date = DateFormatter.dateFormatter.date(from: publicationDate) {
-                
-                return DateFormatter.prettyTimeFormatter.string(from: date)
-            }
-            return "\(Calendar.current.timeZone.identifier)"
+            return { () -> String in
+                if let publicationDate = publicationDate,
+                   let date = DateFormatter.dateFormatter.date(from: publicationDate) {
+                    
+                    return DateFormatter.prettyTimeFormatter.string(from: date)
+                }
+                return "\(Calendar.current.timeZone.identifier)"
+            }()
         }
     }
 

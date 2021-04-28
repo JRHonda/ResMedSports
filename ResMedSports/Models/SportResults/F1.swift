@@ -16,10 +16,12 @@ struct F1: CommonSport {
     
     public var summary: String {
         get {
-            if let winner = winner, let tournament = tournament, let seconds = seconds {
-                return "\(winner.trim()) wins \(tournament.trim()) by \(seconds) seconds"
-            }
-            return "F1 Result"
+            return { () -> String in
+                if let winner = winner, let tournament = tournament, let seconds = seconds {
+                    return "\(winner.trim()) wins \(tournament.trim()) by \(seconds) seconds"
+                }
+                return "F1 Result"
+            }()
         }
     }
     

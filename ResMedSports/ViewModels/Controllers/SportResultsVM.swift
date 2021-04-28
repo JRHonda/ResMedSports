@@ -24,7 +24,10 @@ class SportResultsVM {
     
     /// Kicks off an HTTP request to retrieve sport results from the '/results' endpoint
     func getGroupedAndOrderedSportResults() {
-        return sportResultService.getResults { (result) in
+        return sportResultService.getResults { [weak self] (result) in
+            
+            guard let self = self else { return }
+            
             switch result {
             case .success(let structure):
                 self.orderedSportResultsDictWithDateKeys.send(self.buildOrderedResults(sportResults: structure))

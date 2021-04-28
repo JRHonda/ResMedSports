@@ -17,9 +17,10 @@ class SportResultsTableViewController: UITableViewController {
     let viewModel = SportResultsVM()
     
     lazy var alertController: (String, [UIAlertAction]) -> UIAlertController = {
-        let alert = UIAlertController(title: "Sport News", message: "", preferredStyle: .alert)
-        let paragraphStyle = NSMutableParagraphStyle()
         
+        let alert = UIAlertController(title: "Sport News", message: "", preferredStyle: .alert)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .left
         
         let messageText = NSMutableAttributedString(
@@ -47,12 +48,17 @@ class SportResultsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         if UIApplication.isDeviceJailBrokenCanOpenUrl() {
+            
             let action = UIAlertAction(title: "OK", style: .default) { (action) in
+                // kill app
                 fatalError()
             }
+            
             present(alertController("It appears that your device is jailbroken, you may not use this app on a jailbroken device.", [action]), animated: true, completion: nil)
         }
+        
     }
     
     override func viewDidLoad() {
@@ -65,22 +71,24 @@ class SportResultsTableViewController: UITableViewController {
         // set up pipeline when sport results are received
         viewModel.orderedSportResultsDictWithDateKeys
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { _ in
-                self.tableView.reloadData()
+            .sink(receiveValue: { [weak self] _ in
+                self?.tableView.reloadData()
                 UIApplication.shared.keyWindow?.stopIndicatingActivity()
-                self.getResultsBtn.isEnabled = true
+                self?.getResultsBtn.isEnabled = true
             })
             .store(in: &subscriptions)
         
         // created to handle error if API error occurs without shutting down results subscriber
         viewModel.apiErrorOccured
             .receive(on: DispatchQueue.main)
-            .sink { (error) in
+            .sink { [weak self] (error) in
+                guard let self = self else { return }
                 self.present(self.alertController(error.localizedDescription, []), animated: true)
                 UIApplication.shared.keyWindow?.stopIndicatingActivity()
                 self.getResultsBtn.isEnabled = true
             }
             .store(in: &subscriptions)
+        
     }
     
     // MARK: - Internal
@@ -88,62 +96,94 @@ class SportResultsTableViewController: UITableViewController {
     /// When user taps 'Get Results', an HTTP request is fired off to retrieve sport results
     /// - Parameter sender: BarButtonItem
     @IBAction func getSportResults(_ sender: UIBarButtonItem) {
+        
         sender.isEnabled = false
         UIApplication.shared.keyWindow?.startIndicatingActivity()
         viewModel.getGroupedAndOrderedSportResults()
+        
     }
     
 }
 
+// MARK: - UITableViewDataSource
 extension SportResultsTableViewController {
     
-    // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
+        
         if let count = viewModel.orderedSportResultsDictWithDateKeys.value.0?.count {
             return count
         }
         return 0
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if let dateKey = viewModel.orderedSportResultsDictWithDateKeys.value.1?[section],
            let dateKeyElements = viewModel.orderedSportResultsDictWithDateKeys.value.0?[dateKey] {
+            
             return dateKeyElements.count
         }
         return 0
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SportResultCell", for: indexPath) as! SportResultCellVM
         
-        if let dateKey = viewModel.orderedSportResultsDictWithDateKeys.value.1?[indexPath.section],
-           let sportsToDisplay = viewModel.orderedSportResultsDictWithDateKeys.value.0?[dateKey] {
-            cell.summary.text = sportsToDisplay[indexPath.row].summary
-            cell.time.text = sportsToDisplay[indexPath.row].time
-        } else {
-            cell.summary.text = "IndexPath Row: \(indexPath.row)"
-        }
-        return UIView.animateCellWithMoveAndFade(cell: cell, tableView: tableView, indexPath: indexPath)
+        return { [weak self] () -> UITableViewCell in
+            
+            let genericCell = UITableViewCell()
+            genericCell.textLabel?.text = "No Data"
+            
+            guard let self = self else { return UIView.animateCellWithMoveAndFade(cell: genericCell, tableView: tableView, indexPath: indexPath) }
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "SportResultCell", for: indexPath) as? SportResultCellVM {
+                
+                if let dateKey = self.viewModel.orderedSportResultsDictWithDateKeys.value.1?[indexPath.section],
+                   let sportsToDisplay = self.viewModel.orderedSportResultsDictWithDateKeys.value.0?[dateKey] {
+                    
+                    cell.summary.text = sportsToDisplay[indexPath.row].summary
+                    cell.time.text = sportsToDisplay[indexPath.row].time
+                    
+                    return UIView.animateCellWithMoveAndFade(cell: cell, tableView: tableView, indexPath: indexPath)
+                }
+                
+                return UIView.animateCellWithMoveAndFade(cell: genericCell, tableView: tableView, indexPath: indexPath)
+
+            }
+            return UIView.animateCellWithMoveAndFade(cell: genericCell, tableView: tableView, indexPath: indexPath)
+        }()
+        
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         if let sectionTitle = viewModel.orderedSportResultsDictWithDateKeys.value.1?[section] {
             return sectionTitle
         }
         return "No Date"
+        
     }
     
+}
+
+// MARK: - UITableViewDelegate
+extension SportResultsTableViewController {
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         let sportResultCell = sportCellNib.instantiate(withOwner: self, options: nil).last as! SportResultCellVM
         return sportResultCell.height
+        
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        
         if let dateKey = viewModel.orderedSportResultsDictWithDateKeys.value.1?[indexPath.section],
            let sportsToDisplay = viewModel.orderedSportResultsDictWithDateKeys.value.0?[dateKey] {
             
             let sportResult = sportsToDisplay[indexPath.row]
+            
             var json = ""
             
             do {
@@ -153,21 +193,18 @@ extension SportResultsTableViewController {
             }
             
             present(alertController(json, []), animated: true)
+            
+        } else {
+            
+            present(alertController("Unable to find Sport Result at section: \(indexPath.section) row: \(indexPath.row)", []), animated: true)
+            
         }
+        
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
+// MARK: - JSONEncoderFactory
 struct JsonEncoderFactory {
     
     /// Takes a common sport result and converts it to its concrete implementation
